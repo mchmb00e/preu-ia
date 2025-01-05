@@ -30,3 +30,9 @@ def add_pregunta(evaluacion: str, numero: int, enunciado: str, figura: bool, alt
     new_pregunta = Pregunta(numero=numero,evaluacion=evaluacion , enunciado=enunciado, figura=figura, alternativas=alternativas, correcta=correcta, unidad=unidad)
     session.add(new_pregunta)
     session.commit()
+
+def add_correcta(evaluacion: str, numero: int, correcta: str):
+    global session
+    pregunta = session.query(Pregunta).filter(Pregunta.evaluacion == evaluacion, Pregunta.numero == numero).first()
+    pregunta.correcta = correcta
+    session.commit()
